@@ -33,6 +33,7 @@ class Game:
         # Randomly select the door with the car
         self.car_door = random.randint(0, self.num_doors - 1) 
         self.doors[self.car_door] = True
+        print(self.doors)
 
 
     def _open_all_other_doors(self):
