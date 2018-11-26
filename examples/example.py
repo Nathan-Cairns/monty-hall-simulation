@@ -17,6 +17,15 @@ NO = {'no','n'}
 # FUNCTIONS #
 
 
+def multiple_simulations(num_sims):
+    """Runs multiple simulations and prints statistics
+    Parameters:
+        num_sims -- Run without changing door num_sims times and run with
+            changing door num_sims times.
+    """
+    assert True #TODO
+
+
 def main():
     print("Monty Hall Simulator")
 
@@ -25,7 +34,7 @@ def main():
     mhallgame = game.Game(num_doors)
 
     first_door_idx = int(input("Select the number of the door you wish to"
-            + "open (1 to {}): ".format(num_doors)))
+            + " open (1 to {}): ".format(num_doors)))
 
     # Select the door and monty narrows down
     first_door_idx = first_door_idx - 1
