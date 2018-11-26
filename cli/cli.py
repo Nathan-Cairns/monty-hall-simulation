@@ -7,6 +7,12 @@
 from .context import game
 
 
+# ARGPARS #
+
+
+# TODO add argparse
+
+
 # CONSTANTS #
 
 
@@ -23,8 +29,14 @@ def multiple_simulations(num_sims):
         num_sims -- Run without changing door num_sims times and run with
             changing door num_sims times.
     """
-    assert True #TODO
+    # TODO create two tuples corresponding to wins / fails for change and no change
+    for _ in range(num_sims):
+        # TODO Run Simulations for change and no change and incr win / fails accordingly
+        assert True
 
+    # TODO calculate stats win / total & loss / total for each change / no change
+
+    # TODO print results
 
 def main():
     print("Monty Hall Simulator")
@@ -64,4 +76,5 @@ def main():
 
 
 if __name__ == "__main__":
+    # TODO handle using statistics if flag is given
     main()
