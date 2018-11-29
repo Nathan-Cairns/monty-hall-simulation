@@ -22,39 +22,41 @@ parser.add_argument('-m', default=False, action='store_true',
 
 YES = {'yes','y', ''}
 NO = {'no','n'}
+NO_CHANGE = 1
+CHANGE = 2
 
 
 # FUNCTIONS #
 
 
-def multiple_simulations():
-    """Runs multiple simulations and prints statistics
+def _run_simulation(num_sims, num_doors, choice):
+    """Runs a simulation with a certain choice (change / don't change).
+    Calculates the amount of times the game was won with this choice.
     Parameters:
-        num_sims -- Run without changing door num_sims times and run with
-            changing door num_sims times.
+        num_sims -- The number of times to run the simulation.
+        num_doors -- The number of doors to run the simulation with.
+        choice -- 1=orginal choice of door, 2=change door.
+    Returns:
+        The number of the times the game was one using the passed choice. 
     """
+    wins = 0
+    for _ in range(num_sims):
+        mhallgame = game.Game(num_doors)
+        mhallgame.select_first_door(random.randint(0, num_doors - 1))
+        correct = mhallgame.select_final_door(choice)
+        if correct:
+            wins += 1
+    return wins
+
+
+def multiple_simulations():
+    """Runs multiple simulations and prints statistics"""
     print("Monty Hall Simulator")
     num_doors = int(input("How many doors would you like to test with?: "))
     num_sims = int(input("How many simulations would you like to run?: "))
 
-    no_change_wins, change_wins= (0, 0)
-
-    # Without Change
-    for _ in range(num_sims):
-        mhallgame = game.Game(num_doors)
-        mhallgame.select_first_door(random.randint(0, num_doors - 1))
-        correct = mhallgame.select_final_door(1)
-
-        if correct:
-            no_change_wins += 1
-
-    # With change
-    for _ in range(num_sims):
-        mhallgame = game.Game(num_doors)
-        mhallgame.select_first_door(random.randint(0, num_doors - 1))
-        correct = mhallgame.select_final_door(2)
-        if correct:
-            change_wins += 1
+    no_change_wins = _run_simulation(num_sims, num_doors, CHANGE)
+    change_wins = _run_simulation(num_sims, num_doors, NO_CHANGE)
 
     no_change_correct_stat = no_change_wins / num_sims * 100
     change_correct_stat = change_wins / num_sims * 100
@@ -64,6 +66,7 @@ def multiple_simulations():
 
 
 def main():
+    """Main"""
     print("Monty Hall Simulator")
 
     # Create a game with as many doors as required.
