@@ -4,13 +4,17 @@
 # IMPORTS #
 
 
-from .context import game
+from mhall import game
+import random
+import argparse
 
 
 # ARGPARS #
 
 
-# TODO add argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('-m', default=False, action='store_true', 
+                    help="Run Multiple Sims" )
 
 
 # CONSTANTS #
@@ -23,20 +27,41 @@ NO = {'no','n'}
 # FUNCTIONS #
 
 
-def multiple_simulations(num_sims):
+def multiple_simulations():
     """Runs multiple simulations and prints statistics
     Parameters:
         num_sims -- Run without changing door num_sims times and run with
             changing door num_sims times.
     """
-    # TODO create two tuples corresponding to wins / fails for change and no change
+    print("Monty Hall Simulator")
+    num_doors = int(input("How many doors would you like to test with?: "))
+    num_sims = int(input("How many simulations would you like to run?: "))
+
+    no_change_wins, change_wins= (0, 0)
+
+    # Without Change
     for _ in range(num_sims):
-        # TODO Run Simulations for change and no change and incr win / fails accordingly
-        assert True
+        mhallgame = game.Game(num_doors)
+        mhallgame.select_first_door(random.randint(0, num_doors - 1))
+        correct = mhallgame.select_final_door(1)
 
-    # TODO calculate stats win / total & loss / total for each change / no change
+        if correct:
+            no_change_wins += 1
 
-    # TODO print results
+    # With change
+    for _ in range(num_sims):
+        mhallgame = game.Game(num_doors)
+        mhallgame.select_first_door(random.randint(0, num_doors - 1))
+        correct = mhallgame.select_final_door(2)
+        if correct:
+            change_wins += 1
+
+    no_change_correct_stat = no_change_wins / num_sims * 100
+    change_correct_stat = change_wins / num_sims * 100
+
+    print("Percent won without changing = {}".format(no_change_correct_stat))
+    print("Percent won with changing = {}".format(change_correct_stat))
+
 
 def main():
     print("Monty Hall Simulator")
@@ -76,5 +101,9 @@ def main():
 
 
 if __name__ == "__main__":
-    # TODO handle using statistics if flag is given
-    main()
+    args = parser.parse_args()
+
+    if args.m:
+        multiple_simulations()
+    else:
+        main()
