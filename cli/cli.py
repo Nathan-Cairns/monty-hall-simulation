@@ -61,8 +61,8 @@ def multiple_simulations():
     no_change_correct_stat = no_change_wins / num_sims * 100
     change_correct_stat = change_wins / num_sims * 100
 
-    print("Percent won without changing = {}".format(no_change_correct_stat))
-    print("Percent won with changing = {}".format(change_correct_stat))
+    print("Percent won without changing = {}%".format(no_change_correct_stat))
+    print("Percent won with changing = {}%".format(change_correct_stat))
 
 
 def main():
