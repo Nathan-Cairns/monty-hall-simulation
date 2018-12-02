@@ -14,7 +14,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-m', default=False, action='store_true', 
-                    help="Run Multiple Sims" )
+                    help="Run multiple sims with stats" )
 
 
 # CONSTANTS #
