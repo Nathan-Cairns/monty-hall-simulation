@@ -1,4 +1,4 @@
-# monty-hall-simulation
+# Monty Hall Simulator
 A simple interactive monty hall problem simulation in python.
 This was written to help me better understand and play around with the problem.
 
